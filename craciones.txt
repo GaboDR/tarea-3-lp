@@ -1,0 +1,38 @@
+helado:
+        int radio = (int) (Math.random() * (1000000 - 1000 + 1)) + 1000;
+        int cristalesHidrogeno = (int) (0.65f * 4 * Math.PI * Math.pow(radio, 2));
+        int floresDeSodio = (int) (0.35f * 4 * Math.PI * Math.pow(radio, 2));
+        int consumo = (int) (0.15f * Math.abs(temperatura));
+        int maxTemp = -30;
+        int minTemp = -120;
+        int temperatura = (int) (Math.random() * (maxTemp - minTemp + 1)) + minTemp;
+
+oceanico:
+        int radio = (int) (Math.random() * (1000000 - 10000 + 1)) + 10000;
+        int cristalesHidrogeno = (int) (0.2f * 4 * Math.PI * Math.pow(radio, 2));
+        int floresDeSodio = (int) (0.65f * 4 * Math.PI * Math.pow(radio, 2));
+        int maxTemp = 1000;
+        int minTemp = 30;
+        int profundidad = (int) (Math.random() * (maxTemp - minTemp + 1)) + minTemp;
+        int consumo = (int) (0.002f * Math.pow(profundidad,2));
+
+radiactivo:
+        int radio = (int) (Math.random() * (100000 - 10000 + 1)) + 10000;
+        int cristalesHidrogeno = (int) (0.2f * 4 * Math.PI * Math.pow(radio, 2));
+        int floresDeSodio = (int) (0.2f * 4 * Math.PI * Math.pow(radio, 2));
+        int uranio = (int) (0.25f * 4 * Math.PI * Math.pow(radio, 2));
+        int maxTemp = 50;
+        int minTemp = 10;
+        int radiacion = (int) (Math.random() * (maxTemp - minTemp + 1)) + minTemp;
+        int consumo = (int) (0.3f * Math.abs(radiacion));
+
+volcanico:
+        int radio = (int) (Math.random() * (100000 - 1000 + 1)) + 1000;
+        int cristalesHidrogeno = (int) (0.3f * 4 * Math.PI * Math.pow(radio, 2));
+        int floresDeSodio = 0;
+        int platino = (int) (0.25f * 4 * Math.PI * Math.pow(radio, 2) - 20.5f * Math.pow(temperatura, 2));
+        int maxTemp = 256;
+        int minTemp = 120;
+        int radiacion = (int) (Math.random() * (maxTemp - minTemp + 1)) + minTemp;
+        int consumo = (int) (0.08f * temperatura);
+
