@@ -1,9 +1,16 @@
 public class Helado extends Planeta{
     private int temperatura;
 
-    public Helado(int radio, int cristalesHidrogeno, int floresDeSodio, int consumo, int temperatura) {   
-        super(radio, cristalesHidrogeno, floresDeSodio, consumo);        
-        this.temperatura = temperatura;
+    public Helado(){
+        super();
+        this.radio = calAtributo(1000000, 1000);
+        this.cristalesHidrogeno = calMineral(radio, 0.65f);
+        this.floresDeSodio = calMineral(radio, 0.35f);
+        this.temperatura = calAtributo(-30, -120);
+        this.consumo = calConsumo(temperatura, 0.15f, 1);
+    }
+    public int getTemp(){
+        return temperatura;
     }
 
 }

@@ -1,8 +1,12 @@
 public class Oceanico extends Planeta {
     private int profundidad;
 
-    public Oceanico(int radio, int cristalesHidrogeno, int floresDeSodio, int consumo, int profundidad){
-        super(radio, cristalesHidrogeno, floresDeSodio, consumo);
-        this.profundidad = profundidad;
+    public Oceanico(){
+        super();
+        this.radio = calAtributo(1000000, 10000);
+        this.cristalesHidrogeno = calMineral(radio, 0.2f);
+        this.floresDeSodio = calMineral(radio, 0.65f);
+        this.profundidad = calAtributo(1000, 30);
+        this.consumo = calConsumo(profundidad, 0.002f, 2);
     }
 }

@@ -1,15 +1,47 @@
 public class Jugador {
+
+    private int sodio;
+    private int hidrogeno;
+    private int platino;
+    private int uranio;
     private float unidadesEnergiaProteccion;
     private float eficienciaEnergiaPropulsor;
 
     public Jugador(){
         unidadesEnergiaProteccion = 100f;
         eficienciaEnergiaPropulsor = 0f;
+        sodio = 0;
+        hidrogeno = 0;
+        platino = 0;
+        uranio = 0;
     }
 
     public void recargarEnergiaProteccion(int sodio){
-        unidadesEnergiaProteccion = 0.65f * sodio * (1f + eficienciaEnergiaPropulsor);
-        return;
+        float carga = 0.65f * sodio * (1f + eficienciaEnergiaPropulsor);
+        if (unidadesEnergiaProteccion +carga>=100) {
+            unidadesEnergiaProteccion = 100;
+        } else {
+            unidadesEnergiaProteccion += carga;
+        }
+    }
+    public void mostrarInventario(){
+        System.out.println("Inventario:");
+        System.out.println("Hidrogeno: " + hidrogeno);
+        System.out.println("Sodio: " + sodio);
+        System.out.println("Platino: " + platino);
+        System.out.println("Uranio: " + uranio);
     }
 
+    public int getSodio(){
+        return sodio;
+    }
+    public int getHidrogeno(){
+        return hidrogeno;
+    }
+    public int getPlatino(){
+        return platino;
+    }
+    public int getUranio(){
+        return uranio;
+    }
 }
