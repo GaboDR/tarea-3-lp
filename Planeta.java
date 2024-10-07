@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public abstract class Planeta {
 
     protected int radio;
@@ -35,45 +33,14 @@ public abstract class Planeta {
     
     public boolean visitar(Jugador jugador){
         System.out.println("Haz ingresado al planeta");
+        menuRecursos(jugador);
+
         return true;
     }
+    public abstract void menuRecursos(Jugador jugador);
 
-    public int extraerRecursos(int tipo){
-        System.out.println("Indique la cantidad de recurso que desea extraer: ");
+    public abstract int extraerRecursos(int tipo);
 
-        Scanner scanner = new Scanner(System.in);
-        int cantidad = Integer.parseInt(scanner.nextLine());
-
-        switch (tipo) {
-            case 1: // Cristales
-                cristalesHidrogeno -= cantidad;
-                break;
-            case 2:
-                floresDeSodio -= cantidad;
-                break;
-            case 3:
-            if (this instanceof Volcanico) {
-                ((Volcanico) this).extraerPlatino(cantidad); // Llama al método específico de Volcanico
-            } else {
-                System.out.println("Este planeta no tiene platino.");
-            }
-                break;
-            case 4:
-                System.out.println("Opción 4 seleccionada: Ayuda");
-                break;
-            case 5:
-                System.out.println("Opción 5 seleccionada: Salir");
-                break;
-            // No hay caso default
-        }
-    
-
-
-        //jugador.sethidrogeno(cantidad);
-
-        scanner.close();
-        return 0;
-    }
     public boolean salir(){
         System.out.println("Haz salido al planeta");
 

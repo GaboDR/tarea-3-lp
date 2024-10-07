@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Volcanico extends Planeta{
     private int temperatura;
     private int platino;
@@ -32,5 +34,47 @@ public class Volcanico extends Planeta{
         } else {
             System.out.println("No hay suficiente platino para extraer.");
         }
+    }
+
+    public void menuRecursos(Jugador jugador){
+        System.out.println("Que accion desea hacer (ingrese numero de la accion): ");
+        System.out.println("1: Extraer cristales de hidrogeno");
+        System.out.println("2: Extraer flores de sodio");
+        System.out.println("3: Extraer platino");
+        System.out.println("4: Salir del planeta");
+
+        Scanner scanner = new Scanner(System.in);
+        int cantidad = Integer.parseInt(scanner.nextLine());
+
+        if (cantidad != 4){
+            int agregarInventario = extraerRecursos(cantidad);
+
+        }
+
+
+
+        scanner.close();
+    }
+
+    public int extraerRecursos(int tipo){
+        System.out.println("Indique la cantidad de recurso que desea extraer: ");
+
+        Scanner scanner = new Scanner(System.in);
+        int cantidad = Integer.parseInt(scanner.nextLine());
+
+        switch (tipo) {
+            case 1: // Cristales
+                cristalesHidrogeno -= cantidad;
+                break;
+            case 2:
+                floresDeSodio -= cantidad;
+                break;
+            case 3:
+                platino -= cantidad;
+                break;
+        }
+
+        scanner.close();
+        return cantidad;
     }
 }
