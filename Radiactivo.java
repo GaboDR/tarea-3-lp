@@ -15,4 +15,10 @@ public class Radiactivo extends Planeta{
     public int getUranio(){
         return uranio;
     }
+    public void mostrarAll(){
+        super.mostrarAll();
+        System.out.println("Radiacion: " + radiacion);        
+        System.out.println("Uranio: " + uranio);        
+
+    }
 }

@@ -16,13 +16,33 @@ public class Jugador {
         uranio = 0;
     }
 
+    public void setSodio(int sodios){
+        sodio += sodios;
+    }
+    public void sethidrogeno(int sodios){
+        hidrogeno += sodios;
+    }
+    public void setPlatino(int sodios){
+        platino += sodios;
+    }
+    public void setUranio(int sodios){
+        uranio += sodios;
+    }
+    public void seteficiencia(float sodios){
+        eficienciaEnergiaPropulsor += sodios;
+    }
+
     public void recargarEnergiaProteccion(int sodio){
-        float carga = 0.65f * sodio * (1f + eficienciaEnergiaPropulsor);
+        float carga = 0.65f * (float) sodio * (1f + eficienciaEnergiaPropulsor);
         if (unidadesEnergiaProteccion +carga>=100) {
             unidadesEnergiaProteccion = 100;
         } else {
             unidadesEnergiaProteccion += carga;
         }
+    }
+
+    public void cosumirEnergia(int unidade, int consumo){
+        unidadesEnergiaProteccion -= 0.5f * (float) unidade * ((float) consumo)/100 * (1-eficienciaEnergiaPropulsor);
     }
     public void mostrarInventario(){
         System.out.println("Inventario:");

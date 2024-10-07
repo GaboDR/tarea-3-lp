@@ -15,4 +15,22 @@ public class Volcanico extends Planeta{
     public int getPlatino(){
         return platino;
     }
+    public void mostrarAll(){
+        super.mostrarAll();
+        System.out.println("Temperatura: " + temperatura);    
+        System.out.println("Platino: " + platino);        
+
+    }
+    public void setPlatino(int numero){
+        platino -= numero;
+    }
+    
+    public void extraerPlatino(int cantidad) {
+        if (cantidad <= platino) {
+            platino -= cantidad;
+            System.out.println("Se han extraído " + cantidad + " de platino.");
+        } else {
+            System.out.println("No hay suficiente platino para extraer.");
+        }
+    }
 }

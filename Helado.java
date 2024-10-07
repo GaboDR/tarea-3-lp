@@ -13,4 +13,9 @@ public class Helado extends Planeta{
         return temperatura;
     }
 
+    public void mostrarAll(){
+        super.mostrarAll();
+        System.out.println("Temperatura: " + temperatura);        
+    }
+
 }

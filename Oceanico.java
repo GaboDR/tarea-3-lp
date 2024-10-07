@@ -9,4 +9,8 @@ public class Oceanico extends Planeta {
         this.profundidad = calAtributo(1000, 30);
         this.consumo = calConsumo(profundidad, 0.002f, 2);
     }
+    public void mostrarAll(){
+        super.mostrarAll();
+        System.out.println("Profundidad: " + profundidad);        
+        }
 }
