@@ -1,11 +1,11 @@
 public abstract class Planeta {
 
-    protected int radio;
-    protected int cristalesHidrogeno;
-    protected int floresDeSodio;
-    protected int consumo;
+    private int radio;
+    private int cristalesHidrogeno;
+    private int floresDeSodio;
+    private int consumo;
     private static int cIndice = 0;
-    protected int indice; 
+    private int indice; 
 
     public Planeta(){
         this.indice = cIndice++;
@@ -60,6 +60,22 @@ public abstract class Planeta {
 
     public int getConsumo() {
         return consumo;
+    }
+
+    public void setRadio(int radio) {
+        this.radio = radio;
+    }
+
+    public void setCristalesHidrogeno(int cristalesHidrogeno) {
+        this.cristalesHidrogeno = cristalesHidrogeno;
+    }
+
+    public void setFloresDeSodio(int floresDeSodio) {
+        this.floresDeSodio = floresDeSodio;
+    }
+
+    public void setConsumo(int consumo) {
+        this.consumo = consumo;
     }
     public void mostrarAll(){
         System.out.println("Planeta " + getClass().getSimpleName());

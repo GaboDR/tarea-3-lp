@@ -6,12 +6,17 @@ public class Volcanico extends Planeta{
 
     public Volcanico(){
         super();
-        this.radio = calAtributo(100000, 1000);
-        this.cristalesHidrogeno = calMineral(radio, 0.3f);
-        this.floresDeSodio = 0;
+        int radio = calAtributo(100000, 1000);
+        int cristalesHidrogeno = calMineral(radio, 0.3f);
+        int floresDeSodio = 0;
         this.temperatura = calAtributo(256, 120);
-        this.consumo = calConsumo(temperatura, 0.08f, 1);
+        int consumo = calConsumo(temperatura, 0.08f, 1);
         this.platino = (int) (0.25f * 4 * Math.PI * Math.pow(radio, 2) - 20.5f * Math.pow(temperatura, 2));
+
+        setRadio(radio);
+        setCristalesHidrogeno(cristalesHidrogeno);
+        setFloresDeSodio(floresDeSodio);
+        setConsumo(consumo);
     }
 
     public int getPlatino(){
@@ -36,45 +41,71 @@ public class Volcanico extends Planeta{
         }
     }
 
-    public void menuRecursos(Jugador jugador){
-        System.out.println("Que accion desea hacer (ingrese numero de la accion): ");
-        System.out.println("1: Extraer cristales de hidrogeno");
-        System.out.println("2: Extraer flores de sodio");
-        System.out.println("3: Extraer platino");
-        System.out.println("4: Salir del planeta");
-
+    public void menuRecursos(Jugador jugador) {
+        boolean interactuar = true;
         Scanner scanner = new Scanner(System.in);
-        int cantidad = Integer.parseInt(scanner.nextLine());
+    
+        while (interactuar) {
+            System.out.println("Que acción desea hacer (ingrese número de la acción): ");
+            System.out.println("1: Extraer cristales de hidrógeno");
+            System.out.println("2: Extraer uranio");
+            System.out.println("3: Salir del planeta");
+    
+            int cantidadExtraida = 0;
+            int tipo = Integer.parseInt(scanner.nextLine());
+    
+            // Usar switch en lugar de if-else
+            switch (tipo) {
+                case 1:
+                    cantidadExtraida = extraerRecursos(tipo);
+                    jugador.setHidrogeno(cantidadExtraida);
+                    break;
+                case 2:
+                    cantidadExtraida = extraerRecursos(tipo);
+                    jugador.setPlatino(cantidadExtraida);
+                    break;
+                case 3:
+                    interactuar = false; // Salir del planeta
+                    break;
+                default:
+                    System.out.println("Opción inválida, por favor elija una acción válida.");
+            }
+    
+            if (cantidadExtraida > 0) {
+                jugador.cosumirEnergia(cantidadExtraida, getConsumo());
+                System.out.println("Energía restante del jugador: " + jugador.getEnergia());
+            }
+    
+            // Verificar si la energía del jugador es 0 para salir automáticamente
+            if (jugador.getEnergia() <= 0) {
+                System.out.println("Energía agotada. Has sido expulsado del planeta.");
+                interactuar = false;
+                jugador.truePerder();
 
-        if (cantidad != 4){
-            int agregarInventario = extraerRecursos(cantidad);
-
+            }
         }
-
-
-
-        scanner.close();
+    
     }
+    
 
     public int extraerRecursos(int tipo){
         System.out.println("Indique la cantidad de recurso que desea extraer: ");
 
-        Scanner scanner = new Scanner(System.in);
-        int cantidad = Integer.parseInt(scanner.nextLine());
+        Scanner scanner2 = new Scanner(System.in);
+        int cantidad = Integer.parseInt(scanner2.nextLine());
 
         switch (tipo) {
-            case 1: // Cristales
-                cristalesHidrogeno -= cantidad;
+            case 1:
+                setCristalesHidrogeno(getCristalesHidrogeno() - cantidad);
                 break;
             case 2:
-                floresDeSodio -= cantidad;
+                setFloresDeSodio(getFloresDeSodio() - cantidad);
                 break;
             case 3:
                 platino -= cantidad;
                 break;
         }
 
-        scanner.close();
         return cantidad;
     }
 }
