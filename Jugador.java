@@ -185,7 +185,7 @@ public class Jugador {
 
     private void pausarTutorial(Scanner scanner) {
         System.out.println("Presiona cualquier tecla para continuar...");
-        scanner.nextLine(); // Espera a que el usuario presione una tecla
+        scanner.nextLine(); 
     }
     public void introduccionConNarrativa() {
         Scanner scanner = new Scanner(System.in);

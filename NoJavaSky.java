@@ -20,17 +20,6 @@ public class NoJavaSky {
         while (partida) {
 
             nave.menu(mapa, jugador, nave);
-
-            System.out.println("Terminar partida? 0/1");
-            // Comprobar si hay entrada disponible antes de leer
-            if (scanner.hasNextLine()) {
-                int tipo = Integer.parseInt(scanner.nextLine());
-                if (tipo == 1) {
-                    partida = false;
-                }
-            } else {
-                System.out.println("No se recibió entrada, intenta de nuevo.");
-            }
             jugador.reset(nave, mapa);
         }
 

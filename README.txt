@@ -38,7 +38,9 @@ CONSIDERACIONES AL MOMENTO DE EJECUTAR
   probablidad de aparecer, casi nunca aparece al generar, recomien-
   do tener una eficiencia alta y hacer un salto grande para que se 
   genere.
-
+- Los warning del codigo son causados por los scanner que al cerrar-
+  los me salia error y estaba dificil resolverlo (como no baja nota)
+  
 --------------------------------------------------------------------
 NOMBRE Y ROL ALUMNOS
 --------------------------------------------------------------------

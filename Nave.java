@@ -55,9 +55,23 @@ public class Nave {
                     MG.mostrarMapa();
                     System.out.println("Ingrese la ID del planeta al que desea viajar: ");
                     int idPlaneta = Integer.parseInt(scanner.nextLine());
-                    int direccion = idPlaneta > MG.obtenerPosicionActual() ? 1 : -1;
-                    int tamanoSalto = Math.abs(idPlaneta - MG.obtenerPosicionActual());
-                    viajarPlaneta(MG, direccion, tamanoSalto);
+                    if (idPlaneta >= 0){
+                        int direccion = idPlaneta > MG.obtenerPosicionActual() ? 1 : -1;
+                        int tamanoSalto = Math.abs(idPlaneta - MG.obtenerPosicionActual());
+                        viajarPlaneta(MG, direccion, tamanoSalto);
+                    }
+                    else{
+                        System.out.println("*****************************");
+                        System.out.println("** Has alcanzado el límite del Mapa Galáctico **");
+                        System.out.println("*****************************");
+                        System.out.println();
+                        System.out.println("Sistema de Navegación:");
+                        System.out.println("\"Más allá de este punto, el vacío es como el borde de Tatooine o los desiertos de Arrakis: desconocido y peligroso.");
+                        System.out.println("Tu nave no puede continuar.\"");
+                        System.out.println();
+                        System.out.println("\"Mejor regresa antes de convertirte en otro mito perdido, como Krypton en las estrellas.\"");
+                        System.out.println();
+                    }
                     break;
     
                 case 2:
@@ -119,6 +133,7 @@ public class Nave {
                 
     
                 case 4:
+                if (jugador.getMejoras() >0){
                     if (eficienciaPropulsor < 1f) {
                         eficienciaPropulsor += jugador.getMejoras();
                         if (eficienciaPropulsor > 1f) {
@@ -128,6 +143,10 @@ public class Nave {
                     } else {
                         System.out.println("La eficiencia ya está al máximo.");
                     }
+                }
+                else{
+                    System.out.println("No tienes mejoras que aplicar a la nave.");
+                }
                     break;
     
                 case 5:

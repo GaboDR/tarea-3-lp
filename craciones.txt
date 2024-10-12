@@ -1,5 +1,0 @@
-solo falta testear, buscar errores tontos para evitar tarea 1 
-hacer descripciones de funciones y readme 
-
-poner en readme que con las cantidades pequeñas se redondea y por eso puede que no se descunete o se haga la accion
-en el readme decir que si se usa 0,2 diamantes se gasta 1 , indicar el tema de los nombres y las direcciones de memoria
