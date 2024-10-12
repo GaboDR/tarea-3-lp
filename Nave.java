@@ -168,7 +168,17 @@ public class Nave {
                             nave = false;
                             planeta.visitar(jugador);
                         } else {
-                            System.out.println("Tu nave no es capaz de entrar al centro galáctico.");
+                            System.out.println("*****************************");
+                            System.out.println("** Acceso al Centro Galáctico Denegado **");
+                            System.out.println("*****************************");
+                        
+                            System.out.println();
+                            System.out.println("Sistema de Defensa Galáctico:");
+                            System.out.println("\"El Centro Galáctico está más allá de tu alcance... por ahora.\"");
+                            System.out.println("\"Solo aquellos que dominan los secretos de la galaxia, como los antiguos Jedi o los exploradores de Pandora, pueden cruzar este umbral.\"");
+                            System.out.println();
+                            System.out.println("\"Regresa cuando tu nave y exotraje sean dignos de una leyenda como la de Asgard o Trantor.\"");
+                            System.out.println();
                         }
                     } else {
                         System.out.println("Ingresando al planeta " + MG.planetaActual());
