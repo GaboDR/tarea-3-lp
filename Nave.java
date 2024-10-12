@@ -177,7 +177,7 @@ public class Nave {
                             System.out.println("\"El Centro Galáctico está más allá de tu alcance... por ahora.\"");
                             System.out.println("\"Solo aquellos que dominan los secretos de la galaxia, como los antiguos Jedi o los exploradores de Pandora, pueden cruzar este umbral.\"");
                             System.out.println();
-                            System.out.println("\"Regresa cuando tu nave y exotraje sean dignos de una leyenda como la de Asgard o Trantor.\"");
+                            System.out.println("\"Regresa cuando tu nave sea digna de una leyenda como la de Asgard o Trantor.\"");
                             System.out.println();
                         }
                     } else {
@@ -197,13 +197,6 @@ public class Nave {
             }
         }
     }
-    
-        
-        
-
-        
-    
-
     public void restart(){
         unidadesCombustible = 100f;
         eficienciaPropulsor = 0f;
