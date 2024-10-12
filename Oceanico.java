@@ -68,65 +68,104 @@ public class Oceanico extends Planeta implements TieneAsentamientos{
     
     }
         
-    public int extraerRecursos(int tipo){
-        int cantidad;
-        System.out.println("Indique la cantidad de recurso que desea extraer: ");
+public int extraerRecursos(int tipo) {
+    int cantidad;
+    System.out.println("Indique la cantidad de recurso que desea extraer: ");
 
-        Scanner scanner2 = new Scanner(System.in);
-        cantidad = Integer.parseInt(scanner2.nextLine());
-        switch (tipo) {
+    Scanner scanner2 = new Scanner(System.in);
+    cantidad = Integer.parseInt(scanner2.nextLine());
+
+    switch (tipo) {
+        case 1: 
+            if (cantidad > getCristalesHidrogeno()) {
+                System.out.println("No hay suficientes cristales de hidrógeno. Solo puedes extraer " + getCristalesHidrogeno() + " unidades.");
+                cantidad = getCristalesHidrogeno();  
+            }
+            setCristalesHidrogeno(getCristalesHidrogeno() - cantidad);
+            break;
+
+        case 2: // Flores de sodio
+            if (cantidad > getFloresDeSodio()) {
+                System.out.println("No hay suficientes flores de sodio. Solo puedes extraer " + getFloresDeSodio() + " unidades.");
+                cantidad = getFloresDeSodio(); 
+            }
+            setFloresDeSodio(getFloresDeSodio() - cantidad);
+            break;
+
+        default:
+            System.out.println("Tipo de recurso inválido.");
+            cantidad = 0;
+    }
+
+    return cantidad;
+}
+
+
+public void visitarAsentamiento(Jugador jugador) {
+    Scanner scanner = new Scanner(System.in);
+    boolean interactuar = true;
+
+    // Arte ASCII de un asentamiento futurista en un planeta oceánico
+    System.out.println("          __");
+    System.out.println("         /  \\");
+    System.out.println("        / ..|\\");
+    System.out.println("       (_\\  |_)");
+    System.out.println("       /  \\@'");
+    System.out.println("      /     \\");
+    System.out.println("   _ /  `   |");
+    System.out.println("  //| . . . |\\");
+    System.out.println(" // | . . . | \\");
+    System.out.println("|||||.....|||||");
+    System.out.println(" |||||.....|||||\n");
+
+    // Historia y bienvenida
+    System.out.println("\nHas llegado al asentamiento costero del planeta oceánico. Las gigantes estructuras flotantes parecen desafiar la calma del inmenso océano azul que se extiende hacia el horizonte.");
+    System.out.println("A lo lejos, criaturas marinas colosales, cuyos cuerpos luminosos se deslizan entre las corrientes, emergen de las profundidades y emiten cantos hipnóticos que resuenan en el asentamiento.");
+    System.out.println("\"Bienvenido, viajero estelar\", dice una voz mecánica que emana de un dron que flota junto a ti. \"Aquí, puedes mejorar tu nave o exotraje con los recursos de este mundo marino.\"");
+    System.out.println("El agua a tus pies es tan clara que puedes ver criaturas nadando en las profundidades, su bioluminiscencia iluminando las plataformas.");
+
+    while (interactuar) {
+        System.out.println("\nOpciones disponibles:");
+        System.out.println("1: Mejora de nave un 10% por 70 de platino");
+        System.out.println("2: Mejora de exotraje un 12% por 35 de uranio");
+        System.out.println("3: Salir del asentamiento");
+        System.out.print("¿Qué deseas hacer? Ingresa tu opción: ");
+        
+        int opcion = Integer.parseInt(scanner.nextLine());
+        
+        switch (opcion) {
             case 1:
-                setCristalesHidrogeno(getCristalesHidrogeno() - cantidad);
+                if (jugador.getPlatino() >= 70) {
+                    jugador.setPlatino(-70); 
+                    jugador.setMejorasNave(0.1f); 
+                    System.out.println("Los ingenieros del asentamiento, acompañados por seres marinos inteligentes que parecen medusas gigantes, trabajan en tu nave.");
+                    System.out.println("El agua del océano es utilizada en el proceso, brillando mientras tus motores son recalibrados.");
+                    System.out.println("\"Has mejorado la eficiencia del propulsor de tu nave\", dice el dron. \"Ahora viajarás más lejos, con la velocidad de los vientos oceánicos.\"");
+                } else {
+                    System.out.println("El dron emite un pitido bajo. \"No tienes suficiente platino. Quizás podrías cazar una de las criaturas marinas para obtener más recursos...\"");
+                }
                 break;
             case 2:
-                setFloresDeSodio(getFloresDeSodio() - cantidad);
+                if (jugador.getUranio() >= 35) {
+                    jugador.setUranio(-35); 
+                    jugador.setEficiencia(0.12f); 
+                    System.out.println("Te diriges al laboratorio submarino del asentamiento, sumergido en una cúpula de cristal bajo el agua.");
+                    System.out.println("Los técnicos, junto a criaturas de las profundidades que brillan como estrellas, ajustan la tecnología de tu exotraje.");
+                    System.out.println("\"Has mejorado la eficiencia energética de tu exotraje\", dice el dron. \"Como las criaturas que sobreviven en las heladas profundidades, resistirás mejor en ambientes hostiles.\"");
+                } else {
+                    System.out.println("El dron emite un zumbido. \"No tienes suficiente uranio. Quizás en las profundidades haya más... si te atreves a buscarlo.\"");
+                }
                 break;
-        }
-
-        return cantidad;
-    }
-
-    public void visitarAsentamiento(Jugador jugador) {
-        Scanner scanner = new Scanner(System.in);
-        boolean interactuar = true;
-    
-        System.out.println("Bienvenido al asentamiento. Aquí puedes mejorar tu nave o exotraje.");
-    
-        while (interactuar) {
-            System.out.println("Opciones disponibles:");
-            System.out.println("1: Mejorar la eficiencia del propulsor de la nave un 2% (requiere 10 de platino)");
-            System.out.println("2: Mejorar la eficiencia del exotraje un 5% (requiere 10 de uranio)");
-            System.out.println("3: Salir del asentamiento");
-    
-            int opcion = Integer.parseInt(scanner.nextLine());
-    
-            switch (opcion) {
-                case 1:
-                    if (jugador.getPlatino() >= 10) {
-                        jugador.setPlatino(-10); // Resta 10 de platino
-                        jugador.setMejorasNave(0.02f); // Mejora la nave
-                        System.out.println("Has mejorado la eficiencia del propulsor de tu nave.");
-                    } else {
-                        System.out.println("No tienes suficiente platino.");
-                    }
-                    break;
-                case 2:
-                    if (jugador.getUranio() >= 10) {
-                        jugador.setUranio(-10); // Resta 10 de uranio
-                        jugador.setEficiencia(0.05f); // Mejora la eficiencia del exotraje
-                        System.out.println("Has mejorado la eficiencia energética de tu exotraje.");
-                    } else {
-                        System.out.println("No tienes suficiente uranio.");
-                    }
-                    break;
-                case 3:
-                    System.out.println("Saliendo del asentamiento.");
-                    interactuar = false;
-                    break;
-                default:
-                    System.out.println("Opción inválida. Elige nuevamente.");
-            }
+            case 3:
+                System.out.println("Te despides del asentamiento mientras las criaturas marinas emiten sus últimos cantos antes de sumergirse nuevamente en el océano.");
+                System.out.println("\"Vuelve cuando necesites más mejoras\", murmura el dron mientras te deslizas por los pasillos húmedos y sales de la plataforma.");
+                interactuar = false;
+                break;
+            default:
+                System.out.println("\"Opción inválida\", señala el dron con un tono molesto. \"Por favor, elige nuevamente.\"");
         }
     }
+}
+
     
 }

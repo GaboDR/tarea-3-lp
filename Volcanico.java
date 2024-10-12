@@ -48,7 +48,7 @@ public class Volcanico extends Planeta{
         while (interactuar) {
             System.out.println("Que acción desea hacer (ingrese número de la acción): ");
             System.out.println("1: Extraer cristales de hidrógeno");
-            System.out.println("2: Extraer uranio");
+            System.out.println("2: Extraer platino");
             System.out.println("3: Salir del planeta");
     
             int cantidadExtraida = 0;
@@ -88,24 +88,36 @@ public class Volcanico extends Planeta{
     }
     
 
-    public int extraerRecursos(int tipo){
+    public int extraerRecursos(int tipo) {
         System.out.println("Indique la cantidad de recurso que desea extraer: ");
-
+    
         Scanner scanner2 = new Scanner(System.in);
         int cantidad = Integer.parseInt(scanner2.nextLine());
-
+    
         switch (tipo) {
-            case 1:
+            case 1: // Cristales de hidrógeno
+                if (cantidad > getCristalesHidrogeno()) {
+                    System.out.println("No hay suficientes cristales de hidrógeno. Solo puedes extraer " + getCristalesHidrogeno() + " unidades.");
+                    cantidad = getCristalesHidrogeno(); // Limitar a la cantidad disponible
+                }
                 setCristalesHidrogeno(getCristalesHidrogeno() - cantidad);
                 break;
-            case 2:
-                setFloresDeSodio(getFloresDeSodio() - cantidad);
-                break;
-            case 3:
+    
+    
+            case 2: // Platino
+                if (cantidad > platino) {
+                    System.out.println("No hay suficiente platino. Solo puedes extraer " + platino + " unidades.");
+                    cantidad = platino; // Limitar a la cantidad disponible
+                }
                 platino -= cantidad;
                 break;
+    
+            default:
+                System.out.println("Tipo de recurso inválido.");
+                cantidad = 0; // No se extrae nada si el tipo es inválido
         }
-
+    
         return cantidad;
     }
+    
 }

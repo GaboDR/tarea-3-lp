@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Jugador {
 
     private int sodio;
@@ -63,17 +65,20 @@ public class Jugador {
     public void cosumirEnergia(int unidade, int consumo){
         unidadesEnergiaProteccion -= 0.5f * (float) unidade * ((float) consumo)/100 * (1-eficienciaEnergiaPropulsor);
     }
-    public void mostrarInventario(){
-        System.out.println("Energia del exotraje: " + unidadesEnergiaProteccion);
-        System.out.println("Eficiendia: " + eficienciaEnergiaPropulsor);
-
-
-        System.out.println("Inventario:");
-        System.out.println("Hidrogeno: " + hidrogeno);
-        System.out.println("Sodio: " + sodio);
-        System.out.println("Platino: " + platino);
-        System.out.println("Uranio: " + uranio);
+    public void mostrarInventario() {
+        System.out.println("\n============================");
+        System.out.println("         INVENTARIO          ");
+        System.out.println("============================");
+        System.out.println(String.format("Energía del Exotraje:  %10.2f", unidadesEnergiaProteccion));
+        System.out.println(String.format("Eficiencia Exotraje:   %10.2f", eficienciaEnergiaPropulsor));
+        System.out.println("----------------------------");
+        System.out.println(String.format("Hidrógeno:             %10d", hidrogeno));
+        System.out.println(String.format("Sodio:                %10d", sodio));
+        System.out.println(String.format("Platino:              %10d", platino));
+        System.out.println(String.format("Uranio:               %10d", uranio));
+        System.out.println("============================\n");
     }
+    
 
     public int getSodio(){
         return sodio;
@@ -110,10 +115,152 @@ public class Jugador {
             nave.restart();
             mapa.reset();
     
-            System.out.println("SE ACTIVO EL SISTEMA DE EMERGENCIA");
+            System.out.println("SE ACTIVO EL SISTEMA DE EMERGENCIA!!!");
             System.out.println("Vuelves al planeta 0 y pierdes todo tu inventario y mejoras");
 
         }
     }
+    public void mostrarTutorial() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Bienvenido al tutorial de tu aventura intergaláctica. Aquí aprenderás cómo moverte, extraer recursos y mejorar tu equipo.");
+        pausarTutorial(scanner); // Pausa para que el usuario presione una tecla
 
+        // Sección 1: Interactuar con el Planeta
+        System.out.println("\n--- Interactuar con el Planeta ---");
+        System.out.println("Cuando aterrices en un planeta, tendrás las siguientes opciones:");
+        System.out.println(" Extraer Cristales de Hidrógeno.");
+        System.out.println(" Recoger Flores de Sodio.");
+        System.out.println(" Extaer uranio.");
+        System.out.println(" Recoger platino.");
+        System.out.println(" Visitar los Asentamientos para mejorar tu nave o exotraje.");
+        System.out.println(" Salir del planeta.");
+        System.out.println(" Las opciones dependeran del tipo de planeta que estes.");
+
+        pausarTutorial(scanner); // Pausa para que el usuario presione una tecla
+
+        // Sección 2: Minado de Recursos
+        System.out.println("\n--- Minado de Recursos ---");
+        System.out.println("Para extraer recursos, elige la opción del recurso en el menú del planeta.");
+        System.out.println("Extraer Cristales de Hidrógeno te permitirá recargar combustible para la nave.");
+        System.out.println("Extraer Flores de Sodio te permitirá recargar la energía de tu exotraje.");
+        System.out.println("Extraer uranio y platino te servirá para tradear con locatarios.");
+        System.out.println("Ten en cuenta que extraer recursos consume la energía de tu exotraje, y si se agota, serás expulsado del planeta,");
+        System.out.println("perderas todo tu inventario, mejoras y volveras al inicio del mapa.");
+
+        pausarTutorial(scanner); // Pausa para que el usuario presione una tecla
+
+        // Sección 3: Interactuar con Asentamientos
+        System.out.println("\n--- Interactuar con Asentamientos ---");
+        System.out.println("En los asentamientos, puedes intercambiar recursos para mejorar tu equipo:");
+        System.out.println("1. Mejorar la eficiencia del propulsor de tu nave usando platino o uranio.");
+        System.out.println("2. Mejorar la eficiencia energética de tu exotraje usando platino o uranio.");
+        System.out.println("Estas mejoras te permitirán viajar más lejos y protegerte mejor en ambientes hostiles.");
+        System.out.println("las mejoras de la nave pueden ser aplicadas cuando estes en ella ¡No se aplican automaticamente!.");
+
+        pausarTutorial(scanner); // Pausa para que el usuario presione una tecla
+
+        // Sección 4: Viajar entre Planetas
+        System.out.println("\n--- Viajar entre Planetas ---");
+        System.out.println("Para viajar entre planetas, debes utilizar tu nave.");
+        System.out.println("Usa el mapa galáctico para ver la ubicación de los planetas y planificar tus viajes.");
+        System.out.println("Cada salto consume combustible, que puedes recargar extrayendo Cristales de Hidrógeno.");
+        System.out.println("Si mejoras la eficiencia del propulsor en los asentamientos, consumirás menos combustible en cada salto.");
+        System.out.println("Cuando hagas un viaje te quedaras orbitando el planeta hasta que decidas ingresar.");
+
+        pausarTutorial(scanner); // Pausa para que el usuario presione una tecla
+
+        // Sección 5: Recargar Combustible y Energía
+        System.out.println("\n--- Recargar Combustible y Energía ---");
+        System.out.println("Recarga el combustible de tu nave usando Cristales de Hidrógeno.");
+        System.out.println("Recarga la energía de tu exotraje usando Flores de Sodio.");
+        System.out.println("Recuerda que puedes ver la cantidad de hidrógeno y sodio en tu inventario.");
+        System.out.println("Todas estas opciones estan disponibles cuando estes en tu nave orbitando el planeta, no las podras hacer cuando ingreses al planeta.");
+
+        
+        pausarTutorial(scanner); // Pausa para que el usuario presione una tecla
+
+        // Final del tutorial
+        System.out.println("\n¡Eso es todo por ahora! Explora la galaxia, mejora tu equipo y sobrevive en los planetas más hostiles.");
+    }
+
+    private void pausarTutorial(Scanner scanner) {
+        System.out.println("Presiona cualquier tecla para continuar...");
+        scanner.nextLine(); // Espera a que el usuario presione una tecla
+    }
+    public void introduccionConNarrativa() {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("          __");
+        System.out.println("         /  \\");
+        System.out.println("   .-.  |    |");
+        System.out.println("   | |  |    |");
+        System.out.println("   | |  |    |");
+        System.out.println("   | |  |    |");
+        System.out.println("   | |  |    |");
+        System.out.println("   | | /| |\\ |");
+        System.out.println("   |_|/ |_| \\_|");
+        System.out.println();
+        System.out.println("==== Bienvenido al universo de NoJavaSky ====");
+        System.out.println("Presiona cualquier tecla para continuar...");
+        scanner.nextLine();
+    
+        System.out.println("Te despiertas en la cabina de tu nave, flotando en la vasta inmensidad del espacio.");
+        System.out.println("Las estrellas parpadean a lo lejos, mientras un planeta azul verdoso gira lentamente debajo de ti.");
+        System.out.println("Este es solo uno de los muchos planetas por descubrir...");
+        System.out.println("Presiona cualquier tecla para continuar...");
+        scanner.nextLine();
+    
+        System.out.println("        _____");
+        System.out.println("     ,-:` \\;',`'-,");
+        System.out.println("    .'-;_,;  ':-;_,'");
+        System.out.println("   /;   '/    ,  _`.-\\");
+        System.out.println("  | '`. (`     /` ` \\`|");
+        System.out.println("  |:.  `\\`-.   \\_   / |");
+        System.out.println("  |     (   `,  .`\\ ;'|");
+        System.out.println("   \\     | .'     `-'/'");
+        System.out.println("    `.   ;/        .'");
+        System.out.println("      `'-._____.'");
+        System.out.println();
+        System.out.println("Misión: Sobrevivir, explorar y expandir.");
+        System.out.println("Presiona cualquier tecla para continuar...");
+        scanner.nextLine();
+    
+        System.out.println("Tu misión es simple, pero desafiante: Explorar sistemas estelares desconocidos, recolectar recursos,");
+        System.out.println("mejorar tu nave y exotraje, y sobrevivir en condiciones inhóspitas.");
+        System.out.println("Podrás interactuar con los asentamientos alienígenas y mejorar tu equipo, o correr el riesgo de morir en planetas hostiles.");
+
+        System.out.println("Presiona cualquier tecla para continuar...");
+        scanner.nextLine();
+    
+        System.out.println("En tu viaje espacial, estas son algunas de las mecánicas clave:");
+        System.out.println("1. **Exploración y recursos**: Viaja entre planetas y extrae recursos como Hidrógeno y Sodio para recargar tu nave y tu exotraje.");
+        System.out.println("2. **Asentamientos**: Mejora tu nave o exotraje en los asentamientos con platino y uranio, donde también puedes comerciar con especies locales.");
+        System.out.println("3. **Viaje galáctico**: Navega el Mapa Galáctico y descubre nuevos planetas. Tu eficiencia y combustible determinarán cuán lejos puedes llegar.");
+        System.out.println("4. **Supervivencia**: Asegúrate de tener suficientes recursos para sobrevivir. Si agotas tu energía, tu viaje podría llegar a un trágico fin.");
+        System.out.println("Presiona cualquier tecla para continuar...");
+        scanner.nextLine();
+    
+        // Arte ASCII - Advertencia
+        System.out.println("       .--.");
+        System.out.println("      |o_o |");
+        System.out.println("      |:_/ |");
+        System.out.println("     //   \\ \\");
+        System.out.println("    (|     | )");
+        System.out.println("   /'\\_   _/`\\");
+        System.out.println("   \\___)=(___/");
+        System.out.println();
+        System.out.println("**Advertencia**: Si tu energía llega a 0, serás expulsado de los planetas y perderás tu progreso volviendo al planeta 0.");
+        System.out.println("Presiona cualquier tecla para continuar...");
+        scanner.nextLine();
+    
+        System.out.println("Para ganar, debes alcanzar el mítico Centro Galactico, donde se dice que la verdadera aventura comienza, ");
+        System.out.println("Como el Centro Galactico es una area hostil para las naves, tu eficiencia de propulsor debe ser mayor al 50% para ingresar");
+        
+        System.out.println("Para perder... simplemente agota tu energía o combustible. Pero eso no ocurrirá si juegas con inteligencia, ¿verdad?");
+    
+        System.out.println("Buena suerte, viajero estelar.");
+        System.out.println("Presiona cualquier tecla para finalizar...");
+        scanner.nextLine();
+    }
+    
 }

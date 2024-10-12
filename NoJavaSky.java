@@ -5,6 +5,7 @@ public class NoJavaSky {
 
 
     public static void main(String[] args) {
+        
         System.out.println("Bienvenido a NoJavaSky, elija su nombre de avatar: ");
 
         Scanner scanner = new Scanner(System.in);
@@ -13,6 +14,8 @@ public class NoJavaSky {
         Jugador jugador = new Jugador();
         Nave nave = new Nave();
         MapaGalactico mapa = new MapaGalactico();
+        jugador.introduccionConNarrativa();
+        jugador.mostrarTutorial();
 
         while (partida) {
 
@@ -31,7 +34,6 @@ public class NoJavaSky {
             jugador.reset(nave, mapa);
         }
 
-        System.out.println("Gracias por jugar, " + nombre + "!");
-        scanner.close(); // Cerrar el scanner al final del programa
+        scanner.close(); 
     }
 }

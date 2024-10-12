@@ -1,16 +1,15 @@
 import java.util.Scanner;
 
 public class Nave {
-    private float unidadesCombustible = 10000000000000f;
+    private float unidadesCombustible = 100f;
     private float eficienciaPropulsor = 0f;
 
     public boolean viajarPlaneta(MapaGalactico MG, int direccion, int tamanoSalto){
         int mapa = MG.size();
         int ubicacionFinal = MG.obtenerPosicionActual() + direccion*tamanoSalto;
-        int consumoCombustible = (int) (0.75f * Math.pow(tamanoSalto, 2) * (1 - eficienciaPropulsor));
+        int consumoCombustible = (int) Math.ceil(0.75f * Math.pow(tamanoSalto, 2) * (1 - eficienciaPropulsor));
         if (unidadesCombustible - consumoCombustible > 0){
-            if (ubicacionFinal > mapa){
-                System.out.println(ubicacionFinal - mapa+1);            
+            if (ubicacionFinal >= mapa){           
 
                 MG.crearPlaneta(ubicacionFinal - mapa+1);
             }
@@ -36,7 +35,7 @@ public class Nave {
 
         }
     }
-    public void menu(MapaGalactico MG, Jugador jugador, Nave naveE){
+    public void menu(MapaGalactico MG, Jugador jugador, Nave naveE) {
         boolean nave = true;
         Scanner scanner = new Scanner(System.in);
         while (nave) {
@@ -45,110 +44,137 @@ public class Nave {
             System.out.println("2: Recargar combustible de la nave");
             System.out.println("3: Recargar energía del exotraje");
             System.out.println("4: Aplicar mejoras a la nave");
-            System.out.println("5: Ver inventario y estadisticas");
+            System.out.println("5: Ver inventario y estadísticas");
             System.out.println("6: Ingresar al planeta");
-            System.out.println("7: Ver mapa galactico");
-
-
+            System.out.println("7: Ver mapa galáctico");
+    
             int opcion = Integer.parseInt(scanner.nextLine());
-
+    
             switch (opcion) {
                 case 1:
-                    // Mostrar el mapa antes de que el usuario ingrese la ID
                     MG.mostrarMapa();
                     System.out.println("Ingrese la ID del planeta al que desea viajar: ");
                     int idPlaneta = Integer.parseInt(scanner.nextLine());
-                
-                    // Calcular la dirección según la posición actual y la ID del planeta
                     int direccion = idPlaneta > MG.obtenerPosicionActual() ? 1 : -1;
-                    // Calcular el tamaño del salto basado en la diferencia de posiciones
                     int tamanoSalto = Math.abs(idPlaneta - MG.obtenerPosicionActual());
-                
-                    // Realizar el viaje al planeta seleccionado
                     viajarPlaneta(MG, direccion, tamanoSalto);
                     break;
-
+    
                 case 2:
                     jugador.mostrarInventario();
-                    System.out.println("Hidrogeno didponible: " + jugador.getHidrogeno());
-                    System.out.println("Combustible: " + unidadesCombustible);
+                    System.out.println("Hidrógeno disponible: " + jugador.getHidrogeno());
+                    System.out.println("Combustible actual: " + unidadesCombustible);
                     System.out.println("Ingrese la cantidad de hidrógeno para recargar: ");
                     int hidrogeno = Integer.parseInt(scanner.nextLine());
-                    if (jugador.getHidrogeno()-hidrogeno<0) {
-                        System.out.println("No tienes suficiente hidrogeno");
-                    }
-                    else{
-                        recargarPropulsor(hidrogeno);
-                        jugador.setHidrogeno(-hidrogeno);
+                
+                    if (jugador.getHidrogeno() - hidrogeno < 0) {
+                        System.out.println("No tienes suficiente hidrógeno");
+                    } else {
+
+                        float maxRecarga = 100 -  unidadesCombustible;
+                        float carga = 0.6f * hidrogeno * (1 + eficienciaPropulsor);
+                
+
+                        if (carga > maxRecarga) {
+                            carga = maxRecarga;
+                        }
+                
+
+                        int hidrogenoUtilizado = (int) (carga / (0.6f * (1 + eficienciaPropulsor)));
+                
+                        unidadesCombustible += carga;
+                        jugador.setHidrogeno(-hidrogenoUtilizado);
+                
+                        System.out.println("Se recargó " + carga + " de combustible. Combustible actual: " + unidadesCombustible);
+                        System.out.println("Se utilizó " + hidrogenoUtilizado + " de hidrógeno.");
                     }
                     break;
-
+                
                 case 3:
                     System.out.println("Sodio disponible: " + jugador.getSodio());
-                    System.out.println("Energia del exotraje: " + jugador.getEnergia());
-                    System.out.println("Ingrese cantitidad de sodio");
+                    System.out.println("Energía del exotraje actual: " + jugador.getEnergia());
+                    System.out.println("Ingrese la cantidad de sodio para recargar: ");
                     int sodio = Integer.parseInt(scanner.nextLine());
-                    if (jugador.getSodio() - sodio<0) {
+                
+                    if (jugador.getSodio() - sodio < 0) {
                         System.out.println("No tienes suficiente sodio");
-                    }
-                    else{
-                        jugador.recargarEnergiaProteccion(sodio); // Ejemplo de valor
-                        jugador.setSodio(-sodio);
-                    }
+                    } else {
 
+                        float maxRecarga = 100 - jugador.getEnergia();
+                        float carga = 0.65f * sodio * (1f + eficienciaPropulsor);
+                
+                        if (carga > maxRecarga) {
+                            carga = maxRecarga;
+                        }
+                
+                        int sodioUtilizado = (int) (carga / (0.65f * (1f + eficienciaPropulsor)));
+                
+                        jugador.recargarEnergiaProteccion(sodioUtilizado);
+                        jugador.setSodio(-sodioUtilizado);
+                
+                        System.out.println("Se recargó " + carga + " de energía de protección. Energía actual: " + jugador.getEnergia());
+                        System.out.println("Se utilizó " + sodioUtilizado + " de sodio.");
+                    }
                     break;
+                
+    
                 case 4:
                     if (eficienciaPropulsor < 1f) {
                         eficienciaPropulsor += jugador.getMejoras();
                         if (eficienciaPropulsor > 1f) {
-                            eficienciaPropulsor = 1f;  // Limitar eficiencia a 1
+                            eficienciaPropulsor = 1f;
                         }
-                        System.out.println("Eficiencia del propulsor: " + eficienciaPropulsor);
+                        System.out.println("Eficiencia del propulsor de la nave: " + eficienciaPropulsor);
                     } else {
-                        System.out.println("La eficiencia ya está al máximo");
+                        System.out.println("La eficiencia ya está al máximo.");
                     }
                     break;
-
+    
                 case 5:
                     jugador.mostrarInventario();
-                    System.out.println("Combustible: " + unidadesCombustible);
-
+                    System.out.println("\n============================");
+                    System.out.println("        NAVE ESTADÍSTICAS    ");
+                    System.out.println("============================");
+                    System.out.println(String.format("Combustible:          %10.2f", unidadesCombustible));
+                    System.out.println(String.format("Eficiencia Propulsor: %10.2f", eficienciaPropulsor));
+                    System.out.println("============================\n");
                     break;
-
+                
+    
                 case 6:
-                Planeta planeta = MG.planetaActual();
-                if (planeta instanceof CentroGalactico){
-                    if (naveE.getEficiencia()>0.5f){
+                    Planeta planeta = MG.planetaActual();
+                    if (planeta instanceof CentroGalactico) {
+                        if (naveE.getEficiencia() > 0.5f) {
+                            System.out.println("Ingresando al planeta " + MG.planetaActual());
+                            nave = false;
+                            planeta.visitar(jugador);
+                        } else {
+                            System.out.println("Tu nave no es capaz de entrar al centro galáctico.");
+                        }
+                    } else {
                         System.out.println("Ingresando al planeta " + MG.planetaActual());
                         nave = false;
                         planeta.visitar(jugador);
-
                     }
-                    else{
-                        System.out.println("Tu nave no es capaz de entrar al centro galactico");
-                    }
-                }
-                else{
-                    System.out.println("Ingresando al planeta " + MG.planetaActual());
-                    nave = false;
-                    planeta.visitar(jugador);
-
-                }
-                    // Aquí puedes invocar el método de interacción con el planeta
                     break;
-                case 7: 
+    
+                case 7:
                     MG.mostrarMapa();
                     break;
+    
                 default:
                     System.out.println("Opción inválida. Por favor, elija una opción válida.");
                     break;
             }
-        
         }
+    }
+    
+        
+        
 
         
     
-}
+
     public void restart(){
         unidadesCombustible = 100f;
         eficienciaPropulsor = 0f;

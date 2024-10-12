@@ -43,7 +43,6 @@ public class Radiactivo extends Planeta{
             int cantidadExtraida = 0;
             int tipo = Integer.parseInt(scanner1.nextLine());
     
-            // Usar switch en lugar de if-else
             switch (tipo) {
                 case 1:
                     cantidadExtraida = extraerRecursos(tipo);
@@ -69,7 +68,6 @@ public class Radiactivo extends Planeta{
                 System.out.println("Energía restante del jugador: " + jugador.getEnergia());
             }
     
-            // Verificar si la energía del jugador es 0 para salir automáticamente
             if (jugador.getEnergia() <= 0) {
                 System.out.println("Energía agotada. Has sido expulsado del planeta.");
                 interactuar = false;
@@ -82,25 +80,43 @@ public class Radiactivo extends Planeta{
     }
     
 
-    public int extraerRecursos(int tipo){
+    public int extraerRecursos(int tipo) {
         System.out.println("Indique la cantidad de recurso que desea extraer: ");
-
+    
         Scanner scanner2 = new Scanner(System.in);
         int cantidad = Integer.parseInt(scanner2.nextLine());
-
+    
         switch (tipo) {
-            case 1:
+            case 1: // Cristales de hidrógeno
+                if (cantidad > getCristalesHidrogeno()) {
+                    System.out.println("No hay suficientes cristales de hidrógeno. Solo puedes extraer " + getCristalesHidrogeno() + " unidades.");
+                    cantidad = getCristalesHidrogeno(); 
+                }
                 setCristalesHidrogeno(getCristalesHidrogeno() - cantidad);
                 break;
-            case 2:
+    
+            case 2: // Flores de sodio
+                if (cantidad > getFloresDeSodio()) {
+                    System.out.println("No hay suficientes flores de sodio. Solo puedes extraer " + getFloresDeSodio() + " unidades.");
+                    cantidad = getFloresDeSodio();
+                }
                 setFloresDeSodio(getFloresDeSodio() - cantidad);
                 break;
-            case 3:
+    
+            case 3: // Uranio
+                if (cantidad > uranio) {
+                    System.out.println("No hay suficiente uranio. Solo puedes extraer " + uranio + " unidades.");
+                    cantidad = uranio; // Limitar a la cantidad disponible
+                }
                 uranio -= cantidad;
                 break;
+    
+            default:
+                System.out.println("Tipo de recurso inválido.");
+                cantidad = 0; 
         }
-
-
+    
         return cantidad;
     }
+    
 }

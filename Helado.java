@@ -75,65 +75,99 @@ public class Helado extends Planeta implements TieneAsentamientos{
     
     }
     
-    public int extraerRecursos(int tipo){
+    public int extraerRecursos(int tipo) {
         int cantidad;
         System.out.println("Indique la cantidad de recurso que desea extraer: ");
-
         Scanner scanner2 = new Scanner(System.in);
         cantidad = Integer.parseInt(scanner2.nextLine());
+    
         switch (tipo) {
-            case 1: 
+            case 1: // Cristales de hidrógeno
+                if (cantidad > getCristalesHidrogeno()) {
+                    System.out.println("No hay suficientes cristales de hidrógeno. Solo puedes extraer " + getCristalesHidrogeno() + " unidades.");
+                    cantidad = getCristalesHidrogeno();  // Limitar a la cantidad disponible
+                }
                 setCristalesHidrogeno(getCristalesHidrogeno() - cantidad);
                 break;
-            case 2:
+    
+            case 2: // Flores de sodio
+                if (cantidad > getFloresDeSodio()) {
+                    System.out.println("No hay suficientes flores de sodio. Solo puedes extraer " + getFloresDeSodio() + " unidades.");
+                    cantidad = getFloresDeSodio();  // Limitar a la cantidad disponible
+                }
                 setFloresDeSodio(getFloresDeSodio() - cantidad);
                 break;
+    
+            default:
+                System.out.println("Tipo de recurso inválido.");
+                cantidad = 0;
         }
-        
+    
         return cantidad;
     }
+    
     public void visitarAsentamiento(Jugador jugador) {
         Scanner scanner = new Scanner(System.in);
         boolean interactuar = true;
     
-        System.out.println("Los locales están muy interesados en tu uranio y platino.");
-        System.out.println("Puedes intercambiarlos por mejoras de nave o exotraje.");
+        // Arte ASCII de un asentamiento en un planeta helado
+        System.out.println("     *    .     .       .   . *       *");
+        System.out.println("     .       *        .        *     .");
+        System.out.println("       *    .      *   .   *   .     .");
+        System.out.println("          __/ \\__    .      *     *  .");
+        System.out.println("     *  . \\_o_o_o/  *   .      .  *   ");
+        System.out.println("  .     .  || || || .      *    .     *");
+        System.out.println("         __||_||_||__      .   *   . ");
+        System.out.println("     .  /___________/   *    .        *");
+    
+        // Historia y bienvenida
+        System.out.println("\nHas llegado a un inhóspito asentamiento en el desolado planeta helado. El frío cortante te recibe al bajar de tu nave.");
+        System.out.println("Los locales, cubiertos en gruesas capas de piel sintética y rodeados de construcciones semi-enterradas en el hielo, parecen más duros que las mismas montañas de hielo que los rodean.");
+        System.out.println("Aquí, puedes intercambiar uranio y platino por mejoras para tu nave o exotraje, esenciales para sobrevivir en este mundo brutal.");
+        System.out.println("A lo lejos, colosales tormentas de nieve giran sin cesar, devorando todo a su paso.");
     
         while (interactuar) {
-            System.out.println("Opciones de mejora:");
-            System.out.println("1: Mejora de nave 5%  por 50 uranio");
+            System.out.println("\nOpciones de mejora:");
+            System.out.println("1: Mejora de nave 5% por 50 uranio");
             System.out.println("2: Mejora de exotraje 10% por 30 platino");
             System.out.println("3: Salir del asentamiento");
-    
+            System.out.print("¿Qué deseas hacer? Ingresa tu opción: ");
+            
             int opcion = Integer.parseInt(scanner.nextLine());
-    
+            
             switch (opcion) {
                 case 1:
                     if (jugador.getUranio() >= 50) {
-                        jugador.setUranio(- 50);
-                        jugador.setMejorasNave(0.05f);;
-                        System.out.println("Has comprado mejoras a tu nave, recuerda aplicarlas!!.");
+                        jugador.setUranio(-50);
+                        jugador.setMejorasNave(0.05f);
+                        System.out.println("Los habitantes, con manos expertas endurecidas por el frío, trabajan rápidamente en tu nave. Utilizan los recursos naturales del hielo y la radiación del uranio para mejorar el propulsor.");
+                        System.out.println("\"La nave está lista\", dice uno de ellos, su aliento visible en el aire congelado. \"Con estas mejoras, tu nave será más rápida que el viento helado.\"");
                     } else {
-                        System.out.println("No tienes suficiente uranio para esta mejora.");
+                        System.out.println("Uno de los locales te mira con desaprobación: \"No tienes suficiente uranio. Sin este recurso, no podemos ayudarte.\"");
                     }
                     break;
                 case 2:
                     if (jugador.getPlatino() >= 30) {
-                        jugador.setPlatino(jugador.getPlatino() - 30);
-                        jugador.setEficiencia(0.1f);;
-                        System.out.println("Has mejorado tu exotraje. Eficiencia aumentada en un 10%.");
+                        jugador.setPlatino(-30);
+                        jugador.setEficiencia(0.1f);
+                        System.out.println("Te diriges a un pequeño laboratorio excavado en la nieve. Aquí, los ingenieros locales utilizan platino y otros metales raros para reforzar tu exotraje.");
+                        System.out.println("El frío gélido se siente menos intenso a medida que el aislamiento del exotraje mejora.");
+                        System.out.println("\"Ahora podrás enfrentarte a las peores tormentas\", te asegura uno de los ingenieros mientras ajusta los últimos detalles de tu traje.");
                     } else {
-                        System.out.println("No tienes suficiente platino para esta mejora.");
+                        System.out.println("Los ingenieros te observan en silencio mientras les informas que no tienes suficiente platino.");
+                        System.out.println("\"Vuelve cuando tengas más recursos\", dice uno con un tono frío como el hielo que los rodea.");
                     }
                     break;
                 case 3:
+                    System.out.println("Saliendo del asentamiento, el viento helado te envuelve de nuevo. Los locales te observan desde sus refugios en la nieve.");
+                    System.out.println("\"Que las tormentas te sean leves, viajero\", dice uno de ellos antes de que las puertas del asentamiento se cierren detrás de ti.");
                     interactuar = false;
-                    System.out.println("Has salido del asentamiento.");
                     break;
                 default:
                     System.out.println("Opción inválida. Por favor elige una opción válida.");
             }
         }
-    }  
+    }
+    
 
 }
