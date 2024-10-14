@@ -2,7 +2,11 @@ import java.util.Scanner;
 
 public class Oceanico extends Planeta implements TieneAsentamientos{
     private int profundidad;
-
+    /*
+    None
+    ***
+    Inicializa los valores de un planeta oceánico, basado en las especificaciones iniciales del enunciado
+    */
     public Oceanico(){
         super();
         int radio = calAtributo(1000000, 10000);
@@ -15,10 +19,21 @@ public class Oceanico extends Planeta implements TieneAsentamientos{
         setFloresDeSodio(floresDeSodio);
         setConsumo(consumo);
     }
+    /*
+    None
+    ***
+    Muestra todos los atributos del planeta Oceánico, incluyendo los atributos heredados y la profundidad.
+    */
     public void mostrarAll(){
         super.mostrarAll();
         System.out.println("Profundidad: " + profundidad);        
         }
+    /* Parametro 1: jugador (Jugador)
+    ***
+    None
+    ***
+    Permite al jugador interactuar con el planeta, seleccionando diferentes acciones como extraer recursos o interactuar con los locatarios.
+    */
     public void menuRecursos(Jugador jugador) {
         boolean interactuar = true;
         Scanner scanner = new Scanner(System.in);
@@ -33,7 +48,6 @@ public class Oceanico extends Planeta implements TieneAsentamientos{
             int cantidadExtraida = 0;
             int tipo = Integer.parseInt(scanner.nextLine());
     
-            // Usar switch en lugar de if-else
             switch (tipo) {
                 case 1:
                     cantidadExtraida = extraerRecursos(tipo);
@@ -58,7 +72,6 @@ public class Oceanico extends Planeta implements TieneAsentamientos{
                 System.out.println("Energía restante del jugador: " + jugador.getEnergia());
             }
     
-            // Verificar si la energía del jugador es 0 para salir automáticamente
             if (jugador.getEnergia() <= 0) {
                 System.out.println("Energía agotada. Has sido expulsado del planeta.");
                 interactuar = false;
@@ -67,45 +80,54 @@ public class Oceanico extends Planeta implements TieneAsentamientos{
         }
     
     }
-        
-public int extraerRecursos(int tipo) {
-    int cantidad;
-    System.out.println("Indique la cantidad de recurso que desea extraer: ");
+    /* Parametro 1: tipo (int)
+    ***
+    Return: cantidad (int)
+    ***
+    Permite al jugador extraer una cantidad de recurso de un tipo específico (cristales de hidrógeno o flores de sodio), ajustando el inventario del planeta.
+    */
+    public int extraerRecursos(int tipo) {
+        int cantidad;
+        System.out.println("Indique la cantidad de recurso que desea extraer: ");
 
-    Scanner scanner2 = new Scanner(System.in);
-    cantidad = Integer.parseInt(scanner2.nextLine());
+        Scanner scanner2 = new Scanner(System.in);
+        cantidad = Integer.parseInt(scanner2.nextLine());
 
-    switch (tipo) {
-        case 1: 
-            if (cantidad > getCristalesHidrogeno()) {
-                System.out.println("No hay suficientes cristales de hidrógeno. Solo puedes extraer " + getCristalesHidrogeno() + " unidades.");
-                cantidad = getCristalesHidrogeno();  
-            }
-            setCristalesHidrogeno(getCristalesHidrogeno() - cantidad);
-            break;
+        switch (tipo) {
+            case 1: 
+                if (cantidad > getCristalesHidrogeno()) {
+                    System.out.println("No hay suficientes cristales de hidrógeno. Solo puedes extraer " + getCristalesHidrogeno() + " unidades.");
+                    cantidad = getCristalesHidrogeno();  
+                }
+                setCristalesHidrogeno(getCristalesHidrogeno() - cantidad);
+                break;
 
-        case 2: // Flores de sodio
-            if (cantidad > getFloresDeSodio()) {
-                System.out.println("No hay suficientes flores de sodio. Solo puedes extraer " + getFloresDeSodio() + " unidades.");
-                cantidad = getFloresDeSodio(); 
-            }
-            setFloresDeSodio(getFloresDeSodio() - cantidad);
-            break;
+            case 2:
+                if (cantidad > getFloresDeSodio()) {
+                    System.out.println("No hay suficientes flores de sodio. Solo puedes extraer " + getFloresDeSodio() + " unidades.");
+                    cantidad = getFloresDeSodio(); 
+                }
+                setFloresDeSodio(getFloresDeSodio() - cantidad);
+                break;
 
-        default:
-            System.out.println("Tipo de recurso inválido.");
-            cantidad = 0;
+            default:
+                System.out.println("Tipo de recurso inválido.");
+                cantidad = 0;
+        }
+
+        return cantidad;
     }
 
-    return cantidad;
-}
-
-
-public void visitarAsentamiento(Jugador jugador) {
+    /* Parametro 1: jugador (Jugador)
+    ***
+    None
+    ***
+    Permite al jugador visitar el asentamiento del planeta oceánico, donde puede mejorar la nave o el exotraje a cambio de platino o uranio.
+    */
+    public void visitarAsentamiento(Jugador jugador) {
     Scanner scanner = new Scanner(System.in);
     boolean interactuar = true;
 
-    // Arte ASCII de un asentamiento futurista en un planeta oceánico
     System.out.println("          __");
     System.out.println("         /  \\");
     System.out.println("        / ..|\\");
@@ -118,7 +140,6 @@ public void visitarAsentamiento(Jugador jugador) {
     System.out.println("|||||.....|||||");
     System.out.println(" |||||.....|||||\n");
 
-    // Historia y bienvenida
     System.out.println("\nHas llegado al asentamiento costero del planeta oceánico. Las gigantes estructuras flotantes parecen desafiar la calma del inmenso océano azul que se extiende hacia el horizonte.");
     System.out.println("A lo lejos, criaturas marinas colosales, cuyos cuerpos luminosos se deslizan entre las corrientes, emergen de las profundidades y emiten cantos hipnóticos que resuenan en el asentamiento.");
     System.out.println("\"Bienvenido, viajero estelar\", dice una voz mecánica que emana de un dron que flota junto a ti. \"Aquí, puedes mejorar tu nave o exotraje con los recursos de este mundo marino.\"");

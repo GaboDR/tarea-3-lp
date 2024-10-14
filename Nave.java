@@ -3,7 +3,15 @@ import java.util.Scanner;
 public class Nave {
     private float unidadesCombustible = 100f;
     private float eficienciaPropulsor = 0f;
-
+    /* Parametro 1: MG (MapaGalactico)
+    Parametro 2: direccion (int)
+    Parametro 3: tamanoSalto (int)
+    ***
+    booleano.
+    ***
+    Devuelve true si el viaje se realiza con éxito, o false si hay combustible insuficiente para realizar el salto.
+    Calcula la ubicación final del viaje, verifica el consumo de combustible y, si es posible, mueve la posición en el mapa.
+    */
     public boolean viajarPlaneta(MapaGalactico MG, int direccion, int tamanoSalto){
         int mapa = MG.size();
         int ubicacionFinal = MG.obtenerPosicionActual() + direccion*tamanoSalto;
@@ -23,6 +31,12 @@ public class Nave {
         }
         return true;
     }
+    /* Parametro 1: hidrogeno (int)
+    ***
+    None
+    ***
+    Calcula la carga de combustible a agregar y actualiza la cantidad de unidades de combustible, asegurándose de no exceder la capacidad máxima.
+    */
     public void recargarPropulsor(int hidrogeno){
         int carga = (int) (0.6f * hidrogeno * (1 + eficienciaPropulsor));
         if(carga + unidadesCombustible >100){
@@ -35,6 +49,14 @@ public class Nave {
 
         }
     }
+    /* Parametro 1: MG (MapaGalactico)
+    Parametro 2: jugador (Jugador)
+    Parametro 3: naveE (Nave)
+    ***
+    None.
+    ***
+    Ejecuta un bucle que muestra el menú, espera la entrada del usuario y realiza la acción seleccionada, como viajar a un planeta, recargar combustible o energía, aplicar mejoras, ver estadísticas e ingresar al planeta.
+    */
     public void menu(MapaGalactico MG, Jugador jugador, Nave naveE) {
         boolean nave = true;
         Scanner scanner = new Scanner(System.in);
@@ -197,10 +219,21 @@ public class Nave {
             }
         }
     }
+    /*
+    None
+    ***
+    Restablece el combustible de la nave a 100 unidades y la eficiencia del propulsor a 0.
+    */
     public void restart(){
         unidadesCombustible = 100f;
         eficienciaPropulsor = 0f;
     }
+    /*
+    ***
+    None
+    ***
+    getter.
+    */
     public float getEficiencia(){
         return eficienciaPropulsor;
     }

@@ -1,4 +1,13 @@
 public class CentroGalactico extends Planeta {
+
+    /* Parametro 1: Jugador
+    ***
+    None
+    ***
+    Muestra un mensaje de victoria cuando el jugador llega al Centro Galactico,
+    declarando el final exitoso del juego.
+    */
+
     public void menuRecursos(Jugador jugador){
         System.out.println(" ");
         System.out.println("  __     ______  _    _   _    _ _    _ _   _ ");
@@ -35,6 +44,11 @@ public class CentroGalactico extends Planeta {
         
         NoJavaSky.partida = false;
     }
-
+    /*Parametro 1: Tipo (int)
+    ***
+    Retorno: int
+    ***
+    Implementacion necesaria para el abstract.
+    */
     public int extraerRecursos(int tipo){return 0;}
 }

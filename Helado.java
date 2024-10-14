@@ -2,7 +2,14 @@ import java.util.Scanner;
 
 public class Helado extends Planeta implements TieneAsentamientos{
     private int temperatura;
-
+    /*
+    ***
+    None
+    ***
+    Constructor de la clase Helado. Inicializa atributos como el radio,
+    la cantidad de cristales, flores y la temperatura, ademas de calcular
+    el consumo de energia segun la temperatura.
+    */
     public Helado(){
         super();
         int radio = calAtributo(1000000, 1000);
@@ -15,15 +22,34 @@ public class Helado extends Planeta implements TieneAsentamientos{
         setFloresDeSodio(flores);
         setConsumo(consumo);
     }
+    /*
+    ***
+    Retorno: int
+    ***
+    Devuelve la temperatura del planeta Helado.
+    */
     public int getTemp(){
         return temperatura;
     }
-
+    /*
+    ***
+    None
+    ***
+    Muestra todos los atributos del planeta, incluyendo la temperatura.
+    */
     public void mostrarAll(){
         super.mostrarAll();
         System.out.println("Temperatura: " + temperatura);        
     }
-
+    /*
+    Parametro 1: Jugador
+    ***
+    None
+    ***
+    Muestra un menu de opciones para que el jugador interactue con los recursos
+    del planeta, incluyendo la extraccion de cristales de hidrogeno y flores de sodio,
+    asi como visitar asentamientos.
+    */
     public void menuRecursos(Jugador jugador) {
         boolean interactuar = true;
         Scanner scanner = new Scanner(System.in);
@@ -38,7 +64,6 @@ public class Helado extends Planeta implements TieneAsentamientos{
             int cantidadExtraida = 0;
             int tipo = Integer.parseInt(scanner.nextLine());
     
-            // Usar switch en lugar de if-else
             switch (tipo) {
                 case 1:
                     cantidadExtraida = extraerRecursos(tipo);
@@ -63,18 +88,21 @@ public class Helado extends Planeta implements TieneAsentamientos{
                 System.out.println("Energía restante del jugador: " + jugador.getEnergia());
             }
     
-            // Verificar si la energía del jugador es 0 para salir automáticamente
             if (jugador.getEnergia() <= 0) {
                 System.out.println("Energía agotada. Has sido expulsado del planeta.");
                 interactuar = false;
                 jugador.truePerder();
-
-
             }
         }
     
     }
-    
+    /* Parametro 1: Tipo (int)
+    ***
+    Retorno: int
+    ***
+    Permite extraer una cantidad especifica de recursos segun el tipo.
+    Limita la extraccion a la cantidad disponible en el planeta.
+    */
     public int extraerRecursos(int tipo) {
         int cantidad;
         System.out.println("Indique la cantidad de recurso que desea extraer: ");
@@ -85,7 +113,7 @@ public class Helado extends Planeta implements TieneAsentamientos{
             case 1: // Cristales de hidrógeno
                 if (cantidad > getCristalesHidrogeno()) {
                     System.out.println("No hay suficientes cristales de hidrógeno. Solo puedes extraer " + getCristalesHidrogeno() + " unidades.");
-                    cantidad = getCristalesHidrogeno();  // Limitar a la cantidad disponible
+                    cantidad = getCristalesHidrogeno();  
                 }
                 setCristalesHidrogeno(getCristalesHidrogeno() - cantidad);
                 break;
@@ -93,7 +121,7 @@ public class Helado extends Planeta implements TieneAsentamientos{
             case 2: // Flores de sodio
                 if (cantidad > getFloresDeSodio()) {
                     System.out.println("No hay suficientes flores de sodio. Solo puedes extraer " + getFloresDeSodio() + " unidades.");
-                    cantidad = getFloresDeSodio();  // Limitar a la cantidad disponible
+                    cantidad = getFloresDeSodio();
                 }
                 setFloresDeSodio(getFloresDeSodio() - cantidad);
                 break;
@@ -105,12 +133,17 @@ public class Helado extends Planeta implements TieneAsentamientos{
     
         return cantidad;
     }
-    
+    /* Parametro 1: Jugador
+    ***
+    None
+    ***
+    Permite al jugador visitar un asentamiento en el planeta Helado,
+    donde puede mejorar su nave o exotraje a cambio de uranio o platino.
+    */
     public void visitarAsentamiento(Jugador jugador) {
         Scanner scanner = new Scanner(System.in);
         boolean interactuar = true;
     
-        // Arte ASCII de un asentamiento en un planeta helado
         System.out.println("     *    .     .       .   . *       *");
         System.out.println("     .       *        .        *     .");
         System.out.println("       *    .      *   .   *   .     .");
@@ -120,7 +153,6 @@ public class Helado extends Planeta implements TieneAsentamientos{
         System.out.println("         __||_||_||__      .   *   . ");
         System.out.println("     .  /___________/   *    .        *");
     
-        // Historia y bienvenida
         System.out.println("\nHas llegado a un inhóspito asentamiento en el desolado planeta helado. El frío cortante te recibe al bajar de tu nave.");
         System.out.println("Los locales, cubiertos en gruesas capas de piel sintética y rodeados de construcciones semi-enterradas en el hielo, parecen más duros que las mismas montañas de hielo que los rodean.");
         System.out.println("Aquí, puedes intercambiar uranio y platino por mejoras para tu nave o exotraje, esenciales para sobrevivir en este mundo brutal.");
