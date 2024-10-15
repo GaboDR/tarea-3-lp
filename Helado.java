@@ -41,6 +41,15 @@ public class Helado extends Planeta implements TieneAsentamientos{
         super.mostrarAll();
         System.out.println("Temperatura: " + temperatura);        
     }
+    /* Parametro 1: temperatura
+    ***
+    None
+    ***
+    Setea el parametro
+     */
+    public void setTemp(int temperatura){
+        this.temperatura = temperatura;
+    }
     /*
     Parametro 1: Jugador
     ***

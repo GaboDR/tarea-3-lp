@@ -3,7 +3,12 @@ import java.util.Scanner;
 public class Volcanico extends Planeta{
     private int temperatura;
     private int platino;
-
+    /*
+    None
+    ***
+    Return: void
+    Inicializa el planeta con atributos calculados
+    */
     public Volcanico(){
         super();
         int radio = calAtributo(100000, 1000);
@@ -18,20 +23,43 @@ public class Volcanico extends Planeta{
         setFloresDeSodio(floresDeSodio);
         setConsumo(consumo);
     }
-
+    /*
+    ***
+    Retorno: int
+    ***
+    Getter.
+    */
     public int getPlatino(){
         return platino;
     }
+    /*
+    None
+    ***
+    Return: void
+    ***
+    Muestra toda la información del planeta radiactivo, incluyendo radiación y uranio, además de los atributos heredados.
+    */
     public void mostrarAll(){
         super.mostrarAll();
         System.out.println("Temperatura: " + temperatura);    
         System.out.println("Platino: " + platino);        
 
     }
+    /* Parametro 1: numero (int)
+    ***
+    Return: void
+    ***
+    Establece la cantidad de platino restando un número especificado del total disponible.
+    */
     public void setPlatino(int numero){
         platino -= numero;
     }
-    
+    /* Parametro 1: cantidad (int)
+    ***
+    Return: void
+    ***
+    Extrae una cantidad específica de platino si hay suficiente disponible. De lo contrario, notifica que no hay suficiente platino.
+    */
     public void extraerPlatino(int cantidad) {
         if (cantidad <= platino) {
             platino -= cantidad;
@@ -40,7 +68,11 @@ public class Volcanico extends Planeta{
             System.out.println("No hay suficiente platino para extraer.");
         }
     }
-
+    /* Parametro 1: jugador (Jugador)
+    Return: void
+    ***
+    Menú de recursos del planeta. Permite al jugador extraer cristales de hidrógeno, flores de sodio o uranio, y salir del planeta. La interacción continúa hasta que el jugador elige salir o su energía se agota.
+    */
     public void menuRecursos(Jugador jugador) {
         boolean interactuar = true;
         Scanner scanner = new Scanner(System.in);
@@ -54,7 +86,6 @@ public class Volcanico extends Planeta{
             int cantidadExtraida = 0;
             int tipo = Integer.parseInt(scanner.nextLine());
     
-            // Usar switch en lugar de if-else
             switch (tipo) {
                 case 1:
                     cantidadExtraida = extraerRecursos(tipo);
@@ -65,7 +96,7 @@ public class Volcanico extends Planeta{
                     jugador.setPlatino(cantidadExtraida);
                     break;
                 case 3:
-                    interactuar = false; // Salir del planeta
+                    interactuar = false;
                     break;
                 default:
                     System.out.println("Opción inválida, por favor elija una acción válida.");
@@ -76,7 +107,6 @@ public class Volcanico extends Planeta{
                 System.out.println("Energía restante del jugador: " + jugador.getEnergia());
             }
     
-            // Verificar si la energía del jugador es 0 para salir automáticamente
             if (jugador.getEnergia() <= 0) {
                 System.out.println("Energía agotada. Has sido expulsado del planeta.");
                 interactuar = false;
@@ -87,7 +117,12 @@ public class Volcanico extends Planeta{
     
     }
     
-
+    /* Parametro 1: tipo (int)
+    ***
+    Return: int
+    ***
+    Permite al jugador extraer recursos del planeta en función del tipo seleccionado. 
+    */
     public int extraerRecursos(int tipo) {
         System.out.println("Indique la cantidad de recurso que desea extraer: ");
     
@@ -98,7 +133,7 @@ public class Volcanico extends Planeta{
             case 1: // Cristales de hidrógeno
                 if (cantidad > getCristalesHidrogeno()) {
                     System.out.println("No hay suficientes cristales de hidrógeno. Solo puedes extraer " + getCristalesHidrogeno() + " unidades.");
-                    cantidad = getCristalesHidrogeno(); // Limitar a la cantidad disponible
+                    cantidad = getCristalesHidrogeno(); 
                 }
                 setCristalesHidrogeno(getCristalesHidrogeno() - cantidad);
                 break;
@@ -107,17 +142,34 @@ public class Volcanico extends Planeta{
             case 2: // Platino
                 if (cantidad > platino) {
                     System.out.println("No hay suficiente platino. Solo puedes extraer " + platino + " unidades.");
-                    cantidad = platino; // Limitar a la cantidad disponible
+                    cantidad = platino; 
                 }
                 platino -= cantidad;
                 break;
     
             default:
                 System.out.println("Tipo de recurso inválido.");
-                cantidad = 0; // No se extrae nada si el tipo es inválido
+                cantidad = 0; 
         }
     
         return cantidad;
     }
-    
+    /*
+    ***
+    Retorno: int
+    ***
+    Devuelve la temperatura del planeta.
+    */
+    public int getTemp(){
+        return temperatura;
+    }
+    /* Parametro 1: temperatura
+    ***
+    None
+    ***
+    Setea el parametro
+     */
+    public void setTemp(int temperatura){
+        this.temperatura = temperatura;
+    }
 }

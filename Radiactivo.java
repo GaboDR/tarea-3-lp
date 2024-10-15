@@ -4,6 +4,12 @@ public class Radiactivo extends Planeta{
     private int radiacion;
     private int uranio;
 
+    /*
+    None
+    ***
+    Return: void
+    Inicializa el planeta con atributos calculados
+    */
     public Radiactivo(){
         super();
         int radio = calAtributo(100000, 10000);
@@ -18,17 +24,33 @@ public class Radiactivo extends Planeta{
         setFloresDeSodio(floresDeSodio);
         setConsumo(consumo);
     }
-
+    /*
+    ***
+    Retorno: int
+    ***
+    Getter.
+    */
     public int getUranio(){
         return uranio;
     }
+    /*
+    None
+    ***
+    Return: void
+    ***
+    Muestra toda la información del planeta radiactivo, incluyendo radiación y uranio, además de los atributos heredados.
+    */
     public void mostrarAll(){
         super.mostrarAll();
         System.out.println("Radiacion: " + radiacion);        
         System.out.println("Uranio: " + uranio);        
 
     }
-
+    /* Parametro 1: jugador (Jugador)
+    Return: void
+    ***
+    Menú de recursos del planeta. Permite al jugador extraer cristales de hidrógeno, flores de sodio o uranio, y salir del planeta. La interacción continúa hasta que el jugador elige salir o su energía se agota.
+    */
     public void menuRecursos(Jugador jugador) {
         boolean interactuar = true;
         Scanner scanner1 = new Scanner(System.in);
@@ -79,7 +101,12 @@ public class Radiactivo extends Planeta{
 
     }
     
-
+    /* Parametro 1: tipo (int)
+    ***
+    Return: int
+    ***
+    Permite al jugador extraer recursos del planeta en función del tipo seleccionado. 
+    */
     public int extraerRecursos(int tipo) {
         System.out.println("Indique la cantidad de recurso que desea extraer: ");
     
@@ -106,7 +133,7 @@ public class Radiactivo extends Planeta{
             case 3: // Uranio
                 if (cantidad > uranio) {
                     System.out.println("No hay suficiente uranio. Solo puedes extraer " + uranio + " unidades.");
-                    cantidad = uranio; // Limitar a la cantidad disponible
+                    cantidad = uranio; 
                 }
                 uranio -= cantidad;
                 break;
@@ -118,5 +145,32 @@ public class Radiactivo extends Planeta{
     
         return cantidad;
     }
-    
+    /* Parametro 1: u
+    ***
+    None
+    ***
+    Setea el parametro
+     */
+    public void setUranio(int u){
+        this.uranio = u;
+    }
+    /*
+    ***
+    None
+    ***
+    getter.
+    */
+    public int getRadiacion(){
+        return radiacion;
+    }
+    /* Parametro 1: r
+    ***
+    None
+    ***
+    Setea el parametro
+     */
+    public void setRadiacion(int r){
+        this.radiacion = r;
+    }
+
 }

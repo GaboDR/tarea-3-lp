@@ -134,7 +134,8 @@ public class Nave {
                 
                     if (jugador.getSodio() - sodio < 0) {
                         System.out.println("No tienes suficiente sodio");
-                    } else {
+                    } 
+                    else {
 
                         float maxRecarga = 100 - jugador.getEnergia();
                         float carga = 0.65f * sodio * (1f + eficienciaPropulsor);
@@ -162,7 +163,8 @@ public class Nave {
                             eficienciaPropulsor = 1f;
                         }
                         System.out.println("Eficiencia del propulsor de la nave: " + eficienciaPropulsor);
-                    } else {
+                    } 
+                    else {
                         System.out.println("La eficiencia ya está al máximo.");
                     }
                 }
@@ -189,7 +191,8 @@ public class Nave {
                             System.out.println("Ingresando al planeta " + MG.planetaActual());
                             nave = false;
                             planeta.visitar(jugador);
-                        } else {
+                        } 
+                        else {
                             System.out.println("*****************************");
                             System.out.println("** Acceso al Centro Galáctico Denegado **");
                             System.out.println("*****************************");
@@ -202,7 +205,8 @@ public class Nave {
                             System.out.println("\"Regresa cuando tu nave sea digna de una leyenda como la de Asgard o Trantor.\"");
                             System.out.println();
                         }
-                    } else {
+                    } 
+                    else {
                         System.out.println("Ingresando al planeta " + MG.planetaActual());
                         nave = false;
                         planeta.visitar(jugador);
@@ -237,5 +241,31 @@ public class Nave {
     public float getEficiencia(){
         return eficienciaPropulsor;
     }
-    
+    /* Parametro 1: efi
+    ***
+    None
+    ***
+    Setea el parametro
+     */
+    public void setEficiencia(float efi ){
+        this.eficienciaPropulsor = efi;
+    }
+    /*
+    ***
+    None
+    ***
+    getter.
+    */
+    public float getCombustible(){
+        return unidadesCombustible;
+    }
+    /* Parametro 1: gas
+    ***
+    None
+    ***
+    Setea el parametro
+     */
+    public void setCombustible(float gas){
+        this.unidadesCombustible = gas;
+    }
 }

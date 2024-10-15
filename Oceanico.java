@@ -187,6 +187,22 @@ public class Oceanico extends Planeta implements TieneAsentamientos{
         }
     }
 }
-
-    
+    /* Parametro 1: profundidad
+    ***
+    None
+    ***
+    Setea el parametro
+     */
+    public void setProfundidad(int profundidad){
+        this.profundidad = profundidad;
+    }
+    /*
+    ***
+    None
+    ***
+    getter.
+    */
+    public int getProfundidad(){
+        return profundidad;
+    }
 }

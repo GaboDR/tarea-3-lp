@@ -392,5 +392,14 @@ public class Jugador {
         System.out.println("Presiona cualquier tecla para finalizar...");
         scanner.nextLine();
     }
-    
+    /*
+    ***
+    None
+    ***
+    Getter.
+    */
+    public float getEficiencia(){
+        return eficienciaEnergiaPropulsor;
+    }
+
 }

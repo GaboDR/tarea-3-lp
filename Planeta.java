@@ -176,5 +176,31 @@ public abstract class Planeta {
         System.out.println("Flores de Sodio: " + getFloresDeSodio());
         System.out.println("Consumo: " + getConsumo());
     }
-
+    /* Parametro 1: i
+    ***
+    None
+    ***
+    Setea el parametro
+     */
+    public void setIndice(int i){
+        this.indice = i;
+    }
+    /* Parametro 1: i
+    ***
+    None
+    ***
+    Setea el parametro
+     */
+    public void setID(int i){
+        cIndice = i;
+    }
+    /*
+    ***
+    None
+    ***
+    getter.
+    */
+    public int getID(){
+        return cIndice;
+    }
 }

@@ -25,13 +25,17 @@ public class MapaGalactico {
         int probabilidad = (int) (Math.random() * 100) + 1;
         if (probabilidad <= 30) {
             return new Helado();
-        } else if (probabilidad <= 60) {
+        } 
+        else if (probabilidad <= 60) {
             return new Oceanico();
-        } else if (probabilidad <= 80) {
+        } 
+        else if (probabilidad <= 80) {
             return new Radiactivo();
-        } else if (probabilidad <= 99) {
+        } 
+        else if (probabilidad <= 99) {
             return new Volcanico();
-        } else {
+        } 
+        else {
             if (!centroGalacticoGenerado) {
                 centroGalacticoGenerado = true;
                 return new CentroGalactico();
@@ -136,5 +140,14 @@ public class MapaGalactico {
     */
     public void reset(){
         posicion = 0;
+    }
+    /* Parametro 1: i
+    ***
+    None
+    ***
+    Setea el parametro
+     */
+    public void setPosicio(int i){
+        this.posicion = i;
     }
 }
